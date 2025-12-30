@@ -63,4 +63,34 @@ export const loginUser = async (data) => {
             username: user.username,
         },
     };
-} 
+}
+
+export const updateUser = async (data) => {
+    const { id } = data;
+    const { name, username } = data.body;
+
+    if (username) {
+        const existing = await prisma.user.findUnique({
+            where: { username },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error("Username sudah digunakan")
+        }
+    }
+
+    const updatedUser = await prisma.user.update({
+        where: { id },
+        data: {
+            name,
+            username,
+        },
+        select: {
+            id: true,
+            name: true,
+            username: true,
+            createdAt: true,
+        },
+    });
+
+    return updatedUser;
+}
