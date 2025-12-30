@@ -35,3 +35,11 @@ export const login = async (req, res) => {
         });
     }
 }
+
+export const me = async (req, res) => {
+    return res.json({
+        message: "Berhasil mengambil data user",
+        data: req.user,
+    });
+};
+
