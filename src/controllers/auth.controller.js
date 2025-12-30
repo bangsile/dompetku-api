@@ -1,5 +1,6 @@
 import { registerSchema } from "../validations/auth.validation.js";
-import { registerUser } from "../services/auth.service.js";
+import { loginUser, registerUser } from "../services/auth.service.js";
+import { prisma } from "../libs/prisma.js";
 
 export const register = async (req, res) => {
     try {
@@ -18,3 +19,19 @@ export const register = async (req, res) => {
         });
     }
 };
+
+export const login = async (req, res) => {
+    try {
+        const result = await loginUser(req.body);
+
+        return res.status(200).json({
+            message: "Login berhasil",
+            token: result.token,
+            data: result.user
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message || "Login gagal",
+        });
+    }
+}

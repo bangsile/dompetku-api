@@ -11,3 +11,12 @@ export const registerSchema = z.object({
         error: (iss) => iss.input === undefined ? "Password wajib diisi" : "Password harus berupa string"
     }).min(6, "Password minimal 6 karakter"),
 });
+
+export const loginSchema = z.object({
+    username: z.string({
+        error: (iss) => iss.input === undefined ? "Username wajib diisi" : "Username harus berupa string"
+    }),
+    password: z.string({
+        error: (iss) => iss.input === undefined ? "Password wajib diisi" : "Password harus berupa string"
+    })
+});
