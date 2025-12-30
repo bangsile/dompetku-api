@@ -94,3 +94,15 @@ export const updateUser = async (data) => {
 
     return updatedUser;
 }
+
+export const deleteUser = async (id) => {
+    try {
+        await prisma.user.delete({
+            where: { id }
+        })
+
+        return "Delete user berhasil"
+    } catch (error) {
+        return new Error("Delete user gagal")
+    }
+}
