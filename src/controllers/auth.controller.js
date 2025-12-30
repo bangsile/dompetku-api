@@ -1,6 +1,4 @@
-import { registerSchema } from "../validations/auth.validation.js";
-import { loginUser, registerUser, updateUser } from "../services/auth.service.js";
-import { prisma } from "../libs/prisma.js";
+import { loginUser, registerUser } from "../services/auth.service.js";
 
 export const register = async (req, res) => {
     try {
