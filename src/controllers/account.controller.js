@@ -1,4 +1,4 @@
-import { createAccountService, getMyAccountService, updateAccountService } from "../services/account.service.js";
+import { createAccountService, deleteAccountService, getMyAccountService, updateAccountService } from "../services/account.service.js";
 import { me } from "./auth.controller.js";
 
 export const getMyAccount = async (req, res) => {
@@ -48,6 +48,25 @@ export const updateAccount = async (req, res) => {
     } catch (error) {
         return res.status(400).json({
             message: error.message || "Gagal mengupdate akun/dompet"
+        });
+    }
+}
+
+export const deleteAccount = async (req, res) => {
+    const data = {
+        userId: req.user.id,
+        id: req.params.id
+    }
+
+    try {
+        const result = await deleteAccountService(data)
+        if (result)
+            return res.status(200).json({
+                message: "Berhasil menghapus akun/dompet"
+            });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message || "Gagal menghapus akun/dompet"
         });
     }
 }

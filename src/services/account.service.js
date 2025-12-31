@@ -45,3 +45,17 @@ export const updateAccountService = async (data) => {
 
     return result;
 }
+
+export const deleteAccountService = async (data) => {
+    const { userId, id } = data;
+
+    const account = await prisma.account.findFirst({
+        where: { id, userId }
+    })
+
+    if (!account) throw new Error("Akun tidak ditemukan");
+
+    await prisma.account.delete({ where: { id } })
+
+    return true;
+}
