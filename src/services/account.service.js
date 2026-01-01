@@ -55,6 +55,13 @@ export const deleteAccountService = async (data) => {
 
     if (!account) throw new Error("Akun tidak ditemukan");
 
+    const transactions = await prisma.transaction.count({
+        where: { accountId: id }
+    })
+
+    if (transactions > 0)
+        throw new Error("Tidak dapat menghapus akun karena memiliki transaksi yang terkait")
+
     await prisma.account.delete({ where: { id } })
 
     return true;
