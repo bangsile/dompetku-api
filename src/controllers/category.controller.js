@@ -46,7 +46,7 @@ export const updateCategory = async (req, res) => {
         });
     } catch (error) {
         return res.status(400).json({
-            message: error.message || "Gagal membuat kategori",
+            message: error.message || "Gagal mengupdate kategori",
         });
     }
 }
@@ -63,7 +63,7 @@ export const deleteCategory = async (req, res) => {
             })
     } catch (error) {
         return res.status(400).json({
-            message: error.message || "Gagal membuat kategori",
+            message: error.message || "Gagal menghapus kategori",
         });
     }
 }
